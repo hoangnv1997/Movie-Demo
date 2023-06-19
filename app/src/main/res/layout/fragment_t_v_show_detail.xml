@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hoangnv97.moviedemo.presentation.main.tvshowdetail.TVShowDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/topGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".35" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/movieImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:bind_backdrop_path_loading="@{viewModel.tvShow.backdropPath}"
+            app:bind_progress="@{movieImageProgressBar}"
+            app:layout_constraintBottom_toTopOf="@id/topGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic[1]" />
+
+        <ProgressBar
+            android:id="@+id/movieImageProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="@dimen/progress_bar_size"
+            android:layout_height="@dimen/progress_bar_size"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/movieImage"
+            app:layout_constraintEnd_toEndOf="@id/movieImage"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/movieImage"
+            app:layout_constraintTop_toTopOf="@id/movieImage"
+            tools:visibility="visible" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60dp"
+            android:background="@drawable/shape_gradient"
+            app:layout_constraintBottom_toTopOf="@id/topGuideline"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topGuideline">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_5dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/titleMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.tvShow.originalName}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_36sp"
+                    app:layout_constraintEnd_toStartOf="@id/subInfoMovie"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Title" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/subInfoMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/titleMovie">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/episodeImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_baseline_event_24" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/episodeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5dp"
+                        android:textColor="@android:color/white"
+                        app:bind_date_text="@{viewModel.tvShow.firstAirDate}"
+                        app:layout_constraintBottom_toBottomOf="@id/episodeImage"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/episodeImage"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="22 Oct 2017" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/seasonImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/episodeText"
+                        app:srcCompat="@drawable/ic_baseline_live_tv_24" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/seasonText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5dp"
+                        android:text="@{@string/episodes(viewModel.tvShow.numberOfEpisodes)}"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/seasonImage"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/seasonImage"
+                        app:layout_constraintTop_toTopOf="@id/seasonImage"
+                        tools:text="Episodes: 0" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/airDateImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/seasonText"
+                        app:srcCompat="@drawable/ic_baseline_live_tv_24" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/airDateText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5dp"
+                        android:text="@{@string/seasons(viewModel.tvShow.numberOfSeasons)}"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/airDateImage"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/airDateImage"
+                        app:layout_constraintTop_toTopOf="@id/airDateImage"
+                        tools:text="Episodes: 0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/genresText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_14sp"
+                    app:bind_genres_text="@{viewModel.tvShow.genres}"
+                    app:layout_constraintEnd_toStartOf="@id/subInfoMovie"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/titleMovie"
+                    tools:text="Thriller / Adventure / Action / Mystery" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:numStars="5"
+                    android:stepSize=".5"
+                    android:theme="@style/RatingBarTheme"
+                    app:bind_rating_bar_tv_show="@{viewModel.tvShow.voteAverage}"
+                    app:bind_rating_stars="@{5}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/genresText"
+                    tools:rating="4" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/numOfVotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5dp"
+                    android:text="@{@string/vote(viewModel.tvShow.voteCount)}"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@id/ratingBar"
+                    app:layout_constraintStart_toEndOf="@id/ratingBar"
+                    app:layout_constraintTop_toTopOf="@id/ratingBar"
+                    tools:text="189 votes" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/overviewText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:alpha=".7"
+                    android:text="@{viewModel.tvShow.overview}"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/numOfVotes"
+                    tools:text="Trapped on the beach with their backs to the sea, British and Allied troops are surrounded by enemy forces." />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/watchTrailerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:text="@string/trailer"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_18sp"
+                    app:is_gone="@{!(viewModel.tvShowTrailerList.results.size() > 0)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/overviewText" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/trailerList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5dp"
+                    app:is_gone="@{!(viewModel.tvShowTrailerList.results.size() > 0)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/watchTrailerText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/castText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:text="@string/cast"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/trailerList" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/castList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/castText" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"
+            android:visibility="visible"
+            app:is_gone="@{!viewModel.loading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="invisible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Movie Demo</string>
+    <string name="retry_txt">Retry</string>
+    <string name="title_home">Home</string>
+    <string name="title_movies">Movies</string>
+    <string name="title_tv_shows">TV Shows</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Log in</string>
+    <string name="signup">Sign up</string>
+    <string name="register">Register</string>
+    <string name="popular">Popular</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="vote">%s vote</string>
+    <string name="trailer">Trailer</string>
+    <string name="cast">Cast</string>
+    <string name="biography">Biography</string>
+    <string name="photos">Photos</string>
+    <string name="related_movies">Related movies</string>
+    <string name="discover_movies">Discover Movies</string>
+    <string name="discover_tv_shows">Discover TV Shows</string>
+    <string name="tv_show_detail">TV Show</string>
+    <string name="cast_detail">Cast</string>
+    <string name="movie_detail">Movie</string>
+    <string name="episodes">Episodes: %s</string>
+    <string name="seasons">Seasons: %s</string>
 </resources>

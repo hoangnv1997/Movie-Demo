@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.splash.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_HomeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.login.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_allMovieFragment"
+            app:destination="@id/allMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.register.RegisterFragment"
+        android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/discoverMovieListFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.discovermovielist.DiscoverMovieListFragment"
+        android:label="@string/discover_movies" >
+        <action
+            android:id="@+id/action_discoverMovieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.moviedetail.MovieDetailFragment"
+        android:label="@string/movie_detail">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+        <argument
+            android:name="movieTitle"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_castDetailFragment"
+            app:destination="@id/castDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/castDetailFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.castdetail.CastDetailFragment"
+        android:label="@string/cast_detail">
+        <argument
+            android:name="castId"
+            app:argType="integer" />
+        <argument
+            android:name="castName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_castDetailFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_castDetailFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvShowDetailFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.tvshowdetail.TVShowDetailFragment"
+        android:label="@string/tv_show_detail">
+        <argument
+            android:name="tvShowId"
+            app:argType="integer" />
+        <argument
+            android:name="tvShowName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_tvShowDetailFragment_to_castDetailFragment"
+            app:destination="@id/castDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/discoverTVShowListFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.discovertvshowlist.DiscoverTVShowListFragment"
+        android:label="@string/discover_tv_shows">
+        <action
+            android:id="@+id/action_discoverTVShowListFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allMovieFragment"
+        android:name="com.hoangnv97.moviedemo.presentation.main.allmovie.AllMovieFragment"
+        android:label="{movie_type}" >
+        <argument
+            android:name="movie_type"
+            app:argType="com.hoangnv97.moviedemo.domain.entity.MovieType" />
+        <action
+            android:id="@+id/action_allMovieFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+
+</navigation>
