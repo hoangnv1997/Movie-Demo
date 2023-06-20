@@ -12,6 +12,8 @@
     <dimen name="_25dp">25dp</dimen>
     <dimen name="_30dp">30dp</dimen>
     <dimen name="_35dp">35dp</dimen>
+    <dimen name="_37dp">37dp</dimen>
+    <dimen name="_38dp">38dp</dimen>
     <dimen name="_40dp">40dp</dimen>
     <dimen name="_60dp">60dp</dimen>
     <dimen name="_65dp">65dp</dimen>

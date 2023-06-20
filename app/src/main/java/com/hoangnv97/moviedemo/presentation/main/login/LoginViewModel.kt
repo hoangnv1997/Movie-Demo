@@ -13,10 +13,10 @@ import com.hoangnv97.moviedemo.presentation.common.BaseViewModel
 import com.hoangnv97.moviedemo.usecase.login.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -82,23 +82,46 @@ class LoginViewModel @Inject constructor(
                 email = email.value!!,
                 password = password.value!!
             )
-            loginUseCase.execute(request).collect {
-                if (it) {
-                    appSettingsRepostory.setLogin(it)
-                    _login.value = true
-                } else {
-                    val exception = LocalException(
-                        status = LocalExceptionStatus.INVALID_LOGIN,
-                        title = "Login failed",
-                        message = "Email or password is incorrect. Please try again."
-                    )
-                    val error = ErrorObj(
-                        api = ApiEnum.API_LOCAL,
-                        throwable = exception
-                    )
-                    setFailed(error)
-                }
+            setLoading(true)
+            delay(1500)
+            val result = loginUseCase.isLoginSuccess(
+                email = email.value!!,
+                password = password.value!!
+            )
+            if (result) {
+                appSettingsRepostory.setLogin(true)
+                _login.value = true
+                setLoading(false)
+            } else {
+                setLoading(false)
+                val exception = LocalException(
+                    status = LocalExceptionStatus.INVALID_LOGIN,
+                    title = "Login failed",
+                    message = "Email or password is incorrect. Please try again."
+                )
+                val error = ErrorObj(
+                    api = ApiEnum.API_LOCAL,
+                    throwable = exception
+                )
+                setFailed(error)
             }
+//            loginUseCase.execute(request).collect {
+//                if (it) {
+//                    appSettingsRepostory.setLogin(it)
+//                    _login.value = true
+//                } else {
+//                    val exception = LocalException(
+//                        status = LocalExceptionStatus.INVALID_LOGIN,
+//                        title = "Login failed",
+//                        message = "Email or password is incorrect. Please try again."
+//                    )
+//                    val error = ErrorObj(
+//                        api = ApiEnum.API_LOCAL,
+//                        throwable = exception
+//                    )
+//                    setFailed(error)
+//                }
+//            }
         }
     }
 }

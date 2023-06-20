@@ -89,6 +89,10 @@ class RegisterViewModel @Inject constructor(
                     setFailed(error)
                 }
             }
+            registerUseCase.registerLocalAccount(
+                email = email.value!!,
+                password = password.value!!,
+            )
         }
     }
 }

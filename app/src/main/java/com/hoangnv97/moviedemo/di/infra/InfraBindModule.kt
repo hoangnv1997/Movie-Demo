@@ -2,8 +2,10 @@ package com.hoangnv97.moviedemo.di.infra
 
 import com.hoangnv97.moviedemo.domain.api.ApiService
 import com.hoangnv97.moviedemo.domain.appsettings.AppSettingsRepostory
+import com.hoangnv97.moviedemo.domain.identitylocal.IdentityLocalRepository
 import com.hoangnv97.moviedemo.infra.api.ApiServiceImpl
 import com.hoangnv97.moviedemo.infra.appsettings.AppSettingsRepositoryImpl
+import com.hoangnv97.moviedemo.infra.identitylocal.IdentityLocalRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,4 +22,8 @@ abstract class InfraBindModule {
     @Binds
     @Singleton
     abstract fun appSettings(repo: AppSettingsRepositoryImpl): AppSettingsRepostory
+
+    @Binds
+    @Singleton
+    abstract fun identityLocal(repo: IdentityLocalRepositoryImpl): IdentityLocalRepository
 }
