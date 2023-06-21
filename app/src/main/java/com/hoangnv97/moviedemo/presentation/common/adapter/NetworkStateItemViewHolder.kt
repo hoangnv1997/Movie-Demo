@@ -2,7 +2,7 @@ package com.hoangnv97.moviedemo.presentation.common.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import androidx.core.view.isGone
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.hoangnv97.moviedemo.R
@@ -22,9 +22,9 @@ class NetworkStateItemViewHolder(parent: ViewGroup, private val retryCallback: (
 
     fun bindTo(loadState: LoadState) {
         Timber.e(loadState.toString())
-        progressBar.isVisible = loadState is LoadState.Loading
-        retry.isVisible = loadState is LoadState.Error
-        errorMsg.isVisible = !(loadState as? LoadState.Error)?.error?.message.isNullOrBlank()
+        progressBar.isGone = !(loadState is LoadState.Loading)
+        retry.isGone = !(loadState is LoadState.Error)
+        errorMsg.isGone = (loadState as? LoadState.Error)?.error?.message.isNullOrBlank()
         errorMsg.text = (loadState as? LoadState.Error)?.error?.message
     }
 }
